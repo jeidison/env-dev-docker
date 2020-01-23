@@ -1,0 +1,42 @@
+version: '3.7'
+services:
+  postgres:
+    image: jeidison/postgres
+    container_name: postgres
+    hostname: postgres
+    restart: always
+    ports:
+      - "5433:5432"
+    build:
+      context: ./postgres
+      dockerfile: Dockerfile  
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+
+  php:
+    image: jeidison/php
+    container_name: php
+    hostname: php
+    restart: always
+    ports:
+      - "8003:80"
+      - "8002:8000"
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - postgres  
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    hostname: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    expose:
+      - 6379
