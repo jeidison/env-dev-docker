@@ -23,6 +23,7 @@ services:
     ports:
       - "8003:80"
       - "8002:8000"
+      - "6001:6001"
     build:
       context: ./php
       dockerfile: Dockerfile

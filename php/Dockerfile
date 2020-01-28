@@ -18,3 +18,7 @@ EXPOSE 8001
 
 RUN addgroup --gid 1000 jeidisongroup
 RUN adduser --shell /bin/bash  --disabled-password --gecos "" --force-badname --ingroup jeidisongroup jeidison
+
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN apt install nodejs -y \
+    && npm install -g laravel-echo-server
